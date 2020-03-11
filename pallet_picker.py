@@ -3,13 +3,6 @@ import re
 import sys
 import time
 
-"""This script takes in an image and finds its color pallet, that is,
-its 6 most common colors. It then creates a new image with the pallet
-on the left and the original image on the right.
-Tonight I made it object-oriented, but it still needs to be cleaned
-up a little bit.
-"""
-
 
 class PalletPicker:
     """This class takes in an image and finds its color pallet, that is,
