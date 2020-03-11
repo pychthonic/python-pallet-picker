@@ -7,6 +7,7 @@ import time
 class PalletPicker:
     """This class takes in an image and finds its color pallet, that is,
     its 8 most common dominant colors.
+
     The way it works is -- It opens an image and uses pillow to
     convert its pixels into a list of tuples. It then goes through
     the list 8 times, creating a dictionary each time whose keys are
@@ -14,15 +15,16 @@ class PalletPicker:
     other pixels in the list are very close to it in hue. For a high-
     resolution image, this would take days if not weeks - for example,
     if the image has 4 million pixels, the number of comparisons each
-    time through the loop would be 4 million * 4 million. That's
-    4,000,000,000,000 comparisons. So I had to create lower
-    resolution versions of the image, since I don't think making a
-    computer work for 5 weeks to get a color pallet is a good use of
-    resources. I also noticed that after a high enough resolution,
-    the palette generated becomes indistinguishable from higher
-    resolution versions.
+    time through the loop would be 4,000,000,000,000 comparisons. So I
+    had to create lower resolution versions of the image, since I don't
+    think making a computer work for 5 weeks to get a color pallet is a
+    good use of resources. I also noticed that after a high enough
+    resolution, the palette generated becomes indistinguishable from
+    higher resolution versions.
+
     It then creates a new image with the pallet on the left and the
     original image on the right.
+
     I should be able to speed the program up by making the
     dictionary once, and then finding the 8 most used colors that are
     also different from each other in hue.
@@ -209,7 +211,7 @@ class PalletPicker:
 
 
 if __name__ == '__main__':
-    picture_with_pallet = PalletPicker('nra.jpeg')
+    picture_with_pallet = PalletPicker('corral_reef.jpeg')
 
 
 
