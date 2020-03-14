@@ -54,14 +54,13 @@ class PalletPicker:
             1) + "_with_pallet." + self.filename_parts.group(2)
 
         print(f"new filename: {self.new_filename}")
-
         print(f"im.size = {im.size}")
 
         self.current_pixel_count_main = im.size[0] * im.size[1]
 
         while self.current_pixel_count_main > 20000:
-            new_size = (
-            int((im.size[0] / 20) * 19), int((im.size[1] / 20) * 19))
+            new_size = (int((im.size[0] / 20) * 19),
+                        int((im.size[1] / 20) * 19))
             im = im.resize(new_size, Image.ANTIALIAS)
             self.current_pixel_count_main = im.size[0] * im.size[1]
 
@@ -74,13 +73,12 @@ class PalletPicker:
         self.current_low_rez_pixel_count = (im2_low_rez.size[0]
                                             * im2_low_rez.size[1])
         while self.current_low_rez_pixel_count > 1000:
-            new_size = (
-            int((im2_low_rez.size[0] / 20) * 19),
-            int((im2_low_rez.size[1] / 20) * 19))
+            new_size = (int((im2_low_rez.size[0] / 20) * 19),
+                        int((im2_low_rez.size[1] / 20) * 19))
             im2_low_rez = im2_low_rez.resize(new_size,
-                                                       Image.ANTIALIAS)
+                                             Image.ANTIALIAS)
             self.current_low_rez_pixel_count = (im2_low_rez.size[0]
-                                   * im2_low_rez.size[1])
+                                                * im2_low_rez.size[1])
 
         self.pixel_list_original = list(im.getdata())
 
@@ -89,12 +87,13 @@ class PalletPicker:
         print(f"\nimage size: {im.size}")
         print(f"# of pixels: {im.size[0] * im.size[1]}")
 
-        self.low_rez_filename = self.filename_parts.group(
-            1) + "_low_rez." + self.filename_parts.group(2)
+        self.low_rez_filename = (self.filename_parts.group(1)
+                                 + "_low_rez."
+                                 + self.filename_parts.group(2))
 
         im.save(self.low_rez_filename)
 
-        print(f"len_pixel_list = {len(self.pixel_list_original)}")
+        print(f"pixel count: {len(self.pixel_list_original)}")
 
         first_color = self.get_next_most_used_color(
             self.pixel_list_low_rez)
@@ -111,8 +110,7 @@ class PalletPicker:
 
         im = Image.open(filename, 'r')
 
-        self.pallet_width, self.pallet_height = self.get_pallet_dimensions(
-            im)
+        self.pallet_width, self.pallet_height = self.get_pallet_dimensions(im)
         self.pallet_color_height = im.size[1] // 8
         self.last_pallet_color_height = (im.size[1]
                                          - (im.size[1] // 8))
@@ -149,7 +147,7 @@ class PalletPicker:
         im.close()
         im2_low_rez.close()
 
-    def get_next_most_used_color(self, pixel_list) -> tuple:
+    def get_next_most_used_color(self, pixel_list: list) -> tuple:
         color_dict = {}
         t1 = time.time()
         for pixel1 in pixel_list:
@@ -183,8 +181,8 @@ class PalletPicker:
         tuples) are close hues.
         """
         if (abs(color1[0] - color2[0]) < 6 and
-                abs(color1[1] - color2[1]) < 6 and
-                abs(color1[2] - color2[2]) < 6):
+            abs(color1[1] - color2[1]) < 6 and
+            abs(color1[2] - color2[2]) < 6):
             return True
         else:
             return False
@@ -195,8 +193,8 @@ class PalletPicker:
         tuples) are not close to each other in the color spectrum.
         """
         if (abs(color1[0] - color2[0]) > 50 or
-                abs(color1[1] - color2[1]) > 50 or
-                abs(color1[2] - color2[2]) > 50):
+            abs(color1[1] - color2[1]) > 50 or
+            abs(color1[2] - color2[2]) > 50):
             return True
         else:
             return False
@@ -211,7 +209,7 @@ class PalletPicker:
 
 
 if __name__ == '__main__':
-    picture_with_pallet = PalletPicker('corral_reef.jpeg')
+    picture_with_pallet = PalletPicker('corral_reef.jpg')
 
 
 
